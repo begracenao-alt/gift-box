@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Be Grace Gift Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#43403a; --soft:#7d776c; --muted:#a8a194;
+    --cream:#fbf6ef; --cream2:#f4ebdd; --gold:#c3a36b; --gold-deep:#a98847;
+    --blue:#84cbe6; --blue-deep:#3a96bf; --line:#ece3d4;
+    --serif:"Noto Serif JP",serif; --sans:"Noto Sans JP",sans-serif; --script:"Cormorant Garamond","Noto Serif JP",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{font-family:var(--sans);color:var(--ink);
+    background:radial-gradient(120% 70% at 50% 0%,#fff 0%,var(--cream) 55%,var(--cream2) 100%);
+    background-attachment:fixed;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
+  .frame{width:100%;max-width:480px;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:34px 26px 44px;position:relative}
+
+  .screen{display:none;width:100%;text-align:center;animation:fade .9s ease both}
+  .screen.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .brand{font-family:var(--script);font-style:italic;font-size:30px;color:var(--gold-deep);letter-spacing:.02em}
+  .brand-sub{font-family:var(--script);font-size:11px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-top:2px}
+  .lead{font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.6;margin:0 0 14px}
+  h2{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.6;margin:0 0 12px}
+  p.body{font-size:14px;line-height:2;color:var(--soft);margin:0 auto 8px;max-width:340px}
+  .name{font-family:var(--serif);color:var(--gold-deep)}
+
+  .btn{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.06em;border:none;cursor:pointer;
+    padding:15px 34px;border-radius:999px;color:#fff;margin-top:26px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));box-shadow:0 12px 26px -12px rgba(150,120,60,.7);
+    transition:transform .15s,filter .2s}
+  .btn:active{transform:scale(.96)}
+  .btn.soft{background:none;color:var(--soft);box-shadow:none;padding:12px;font-weight:500;font-size:12.5px;letter-spacing:.04em}
+  .btn.line{background:none;color:var(--gold-deep);border:1px solid var(--gold);box-shadow:none}
+
+  /* ギフトボックス */
+  .box-wrap{margin:10px auto 6px;width:200px;height:200px;position:relative;cursor:pointer}
+  .box{position:absolute;left:30px;top:70px;width:140px;height:110px;border-radius:10px;
+    background:linear-gradient(135deg,#fbf3e6,#f0e0c6);box-shadow:0 18px 40px -16px rgba(150,110,50,.55)}
+  .lid{position:absolute;left:18px;top:54px;width:164px;height:46px;border-radius:10px;
+    background:linear-gradient(135deg,#f7ecd8,#ecd9b8);box-shadow:0 8px 18px -8px rgba(150,110,50,.5);
+    transform-origin:center bottom;transition:transform 1s cubic-bezier(.5,-0.3,.3,1.3),opacity .8s}
+  .ribbon-v{position:absolute;left:92px;top:54px;width:16px;height:126px;background:linear-gradient(180deg,var(--gold),var(--gold-deep));border-radius:3px}
+  .bow{position:absolute;left:73px;top:38px;width:54px;height:34px;transition:transform .8s,opacity .8s}
+  .bow::before,.bow::after{content:"";position:absolute;top:0;width:26px;height:34px;border-radius:60% 60% 40% 40%;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+  .bow::before{left:0;transform:rotate(-18deg)}
+  .bow::after{right:0;transform:rotate(18deg)}
+  .glow{position:absolute;left:50%;top:60%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(255,244,214,.95),rgba(255,244,214,0) 70%);transition:width 1s,height 1s;pointer-events:none}
+  .box-wrap.open .lid{transform:translateY(-40px) rotate(-12deg);opacity:0}
+  .box-wrap.open .bow{transform:translateY(-60px) scale(.6);opacity:0}
+  .box-wrap.open .glow{width:300px;height:300px}
+  .tap-hint{font-size:12px;color:var(--muted);letter-spacing:.1em;margin-top:6px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+  /* 呼吸 */
+  .breath{margin:24px auto;width:230px;height:230px;display:flex;align-items:center;justify-content:center;position:relative}
+  .breath .ring{position:absolute;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(132,203,230,.5),rgba(132,203,230,.08) 70%);
+    border:1px solid rgba(58,150,191,.25);transition:transform 4.8s ease-in-out}
+  .breath.inhale .ring{transform:scale(1.7)}
+  .breath.exhale .ring{transform:scale(1)}
+  .breath .word{font-family:var(--serif);font-size:18px;color:var(--blue-deep);z-index:2}
+
+  /* 診断・問い */
+  .choices{display:flex;flex-direction:column;gap:11px;margin:22px auto 0;max-width:360px}
+  .choice{font-family:var(--sans);font-size:14.5px;font-weight:500;text-align:left;padding:15px 20px;border-radius:16px;
+    border:1px solid var(--line);background:rgba(255,255,255,.7);color:var(--ink);cursor:pointer;transition:.15s;line-height:1.6}
+  .choice:hover{border-color:var(--gold)}
+  .choice:active{transform:scale(.985);background:#fff}
+
+  .qcount{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:10px}
+
+  /* ギフトカード */
+  .gcard{margin:18px auto 0;max-width:360px;background:linear-gradient(160deg,#fffdf9,#f6ecdb);
+    border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:0 22px 50px -24px rgba(150,110,50,.5);position:relative}
+  .gcard::before{content:"";position:absolute;inset:9px;border:1px solid rgba(195,163,107,.4);border-radius:16px;pointer-events:none}
+  .gcard .to{font-size:12px;color:var(--soft);letter-spacing:.1em}
+  .gcard .type{font-family:var(--serif);font-size:21px;color:var(--gold-deep);margin:12px 0}
+  .gcard .msg{font-size:13.5px;line-height:2;color:var(--soft)}
+  .gcard .sign{font-family:var(--script);font-style:italic;font-size:20px;color:var(--gold-deep);margin-top:18px}
+
+  .dots{display:flex;gap:7px;justify-content:center;margin-top:30px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:.3s}
+  .dots i.on{background:var(--gold);transform:scale(1.4)}
+
+  .divider{width:44px;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+  /* ギフトの循環 */
+  .cycle{margin:22px auto;max-width:330px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .cyc{width:100%;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:14px;
+    padding:12px 16px;font-size:13.5px;color:var(--soft)}
+  .cyc .sub{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+  .cyc.gold{background:linear-gradient(135deg,#fffaf0,#f6ecd8);border-color:#e8d6ab;color:var(--gold-deep);font-weight:600}
+  .cyc.gold b{color:var(--gold-deep)}
+  .arr{color:var(--gold);font-size:14px}
+
+  /* トースト */
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
+    padding:11px 22px;border-radius:999px;font-size:13px;z-index:200;box-shadow:0 8px 28px rgba(80,60,30,.3)}
+  .toast[hidden]{display:none}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- 1. 箱を開ける -->
+  <section class="screen on" id="s-open">
+    <div class="brand">Be Grace</div>
+    <div class="brand-sub">Gift Box</div>
+    <div class="divider"></div>
+    <p class="body" style="margin-bottom:6px"><span class="name" id="nm1">あなた</span>さんへ</p>
+    <div class="box-wrap" id="boxWrap">
+      <div class="glow"></div>
+      <div class="box"></div>
+      <div class="ribbon-v"></div>
+      <div class="lid"></div>
+      <div class="bow"></div>
+    </div>
+    <div class="tap-hint" id="tapHint">そっと、タップして開けてください</div>
+  </section>
+
+  <!-- 2. ようこそ（個別の余韻） -->
+  <section class="screen" id="s-welcome">
+    <div class="lead">Welcome</div>
+    <h1>個別相談、<br>ありがとうございました。</h1>
+    <p class="body">お話できた時間が、わたしはとても嬉しかったです。<br>今日は、その続きの小さな贈り物を3つ。</p>
+    <p class="body">どれも、触れて・感じて、1〜2分。<br>Be Graceの世界を、ひと口だけ味わってください。</p>
+    <button class="btn" data-go="s-breath">贈り物をひらく</button>
+  </section>
+
+  <!-- 3. ギフト①：整える呼吸（カラダ） -->
+  <section class="screen" id="s-breath">
+    <div class="lead">Gift 1 ／ カラダ</div>
+    <h2>整える、ひと呼吸</h2>
+    <p class="body" id="breathGuide">光に合わせて、ゆっくり吸って、ゆっくり吐いて。</p>
+    <div class="breath" id="breath"><div class="ring"></div><div class="word" id="breathWord">はじめます</div></div>
+    <button class="btn" id="breathStart">はじめる</button>
+    <button class="btn soft" data-go="s-quiz" id="breathNext" style="display:none">つぎへ ›</button>
+  </section>
+
+  <!-- 4. ギフト②：自分を知る（ミニ診断） -->
+  <section class="screen" id="s-quiz">
+    <div class="lead">Gift 2 ／ 自分を知る</div>
+    <div class="qcount" id="qcount">QUESTION 1 / 3</div>
+    <h2 id="qtitle"></h2>
+    <div class="choices" id="qchoices"></div>
+  </section>
+
+  <!-- 5. ギフト③：意識・お金の問い -->
+  <section class="screen" id="s-question">
+    <div class="lead">Gift 3 ／ 意識</div>
+    <h2>ひとつ、美しい問い。</h2>
+    <p class="body">もし“お金”が、あなたの意識の質をうつす鏡だとしたら——<br>いま、いちばん大切にしたいのは？</p>
+    <div class="choices" id="moneyChoices"></div>
+  </section>
+
+  <!-- 6. ギフトカード（持ち帰り） -->
+  <section class="screen" id="s-card">
+    <div class="lead">あなたへの贈り物</div>
+    <div class="gcard">
+      <div class="to"><span class="name" id="nm2">あなた</span> さんへ</div>
+      <div class="type" id="cardType">めぐるあなた</div>
+      <div class="msg" id="cardMsg"></div>
+      <div class="sign">Be Grace</div>
+    </div>
+    <p class="body" style="font-size:12px;color:var(--muted);margin-top:14px">この画面はスクリーンショットで持ち帰れます 📷</p>
+    <button class="btn" data-go="s-bridge">さいごに</button>
+  </section>
+
+  <!-- 7. 本講座への橋渡し -->
+  <section class="screen" id="s-bridge">
+    <div class="lead">Be Grace</div>
+    <h1>これは、ほんの入り口。</h1>
+    <p class="body">今日のひと口を、本当の変化に変えていく場所があります。<br>本講座では、あなたの“整う”を半年かけて深めていきます。</p>
+    <div class="divider"></div>
+    <button class="btn soft" data-go="s-circulate">つぎへ ›</button>
+  </section>
+
+  <!-- 8. ギフトの循環 -->
+  <section class="screen" id="s-circulate">
+    <div class="lead">Gift Circulation</div>
+    <h1>受け取ったら、<br>誰かへ。</h1>
+    <p class="body">このひとときが心に触れたなら、<br>あなたの大切な人にも、そっと贈ってみませんか。</p>
+    <div class="cycle">
+      <div class="cyc">あなたが受け取る</div>
+      <div class="arr">↓</div>
+      <div class="cyc">大切な人へ贈る</div>
+      <div class="arr">↓</div>
+      <div class="cyc">その人がBe Graceと出会う<span class="sub">（セミナー・個別相談）</span></div>
+      <div class="arr">↓</div>
+      <div class="cyc gold">あなたへ <b>Secret Gift</b> が届く</div>
+    </div>
+    <p class="body" style="font-size:12.5px;color:var(--muted)">紹介でもポイントでもなく、めぐっていく贈り物として。<br>あなたの「よかった」が、誰かの「はじまり」になりますように。</p>
+    <button class="btn" id="shareBtn">大切な人へ贈る</button><br>
+    <button class="btn soft" data-go="s-open">とじる</button>
+  </section>
+
+  <div class="dots" id="dots"></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+  // 名前（?name=○○ で差し込み可）
+  var params=new URLSearchParams(location.search);
+  var name=params.get('name')||'';
+  if(name){document.getElementById('nm1').textContent=name;document.getElementById('nm2').textContent=name;}
+  // 本講座/個別リンク（?course= , ?line= で差し込み可）。未設定はプレースホルダ
+  var course=params.get('course')||'#', line=params.get('line')||'#';
+
+  var screens=['s-open','s-welcome','s-breath','s-quiz','s-question','s-card','s-bridge','s-circulate'];
+  var dotsHost=document.getElementById('dots');
+  screens.forEach(function(){var i=document.createElement('i');dotsHost.appendChild(i);});
+  function show(idOrName){
+    var id=idOrName;
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
+    var el=document.getElementById(id);el.classList.add('on');
+    window.scrollTo(0,0);
+    var idx=screens.indexOf(id);
+    dotsHost.querySelectorAll('i').forEach(function(d,i){d.classList.toggle('on',i===idx);});
+  }
+  document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){show(b.dataset.go);};});
+
+  // 1. 箱をひらく
+  var boxWrap=document.getElementById('boxWrap');
+  boxWrap.onclick=function(){
+    if(boxWrap.classList.contains('open'))return;
+    boxWrap.classList.add('open');
+    document.getElementById('tapHint').style.opacity='0';
+    setTimeout(function(){show('s-welcome');},1100);
+  };
+
+  // 3. 呼吸
+  var breath=document.getElementById('breath'), bword=document.getElementById('breathWord');
+  var bguide=document.getElementById('breathGuide');
+  var breathTimer=null, cycle=0;
+  document.getElementById('breathStart').onclick=function(){
+    this.style.display='none'; cycle=0; runBreath();
+  };
+  function runBreath(){
+    // 吸う(5s)→吐く(5s) を3回
+    function inhale(){breath.classList.add('inhale');breath.classList.remove('exhale');bword.textContent='吸って…';}
+    function exhale(){breath.classList.remove('inhale');breath.classList.add('exhale');bword.textContent='吐いて…';}
+    inhale();
+    var phase=0;
+    breathTimer=setInterval(function(){
+      phase++;
+      if(phase%2===1){exhale();}
+      else{cycle++; if(cycle>=3){clearInterval(breathTimer);finishBreath();return;} inhale();}
+    },5000);
+  }
+  function finishBreath(){
+    breath.classList.remove('inhale','exhale');
+    bword.textContent='ふぅ…';
+    bguide.textContent='整いましたね。この感覚が、Be Graceの入り口です。';
+    document.getElementById('breathNext').style.display='inline-block';
+  }
+
+  // 4. ミニ診断（※プレースホルダ。本物の体質診断に差し替え可）
+  var QUIZ=[
+    {q:'朝、目が覚めたときの自分は？',a:[
+      {t:'すっと動ける・活動的',k:'fire'},
+      {t:'ゆっくり・あたたまるまで時間がいる',k:'water'},
+      {t:'日によってムラがある',k:'wind'}]},
+    {q:'いま、いちばん欲しいものは？',a:[
+      {t:'前に進む力・情熱',k:'fire'},
+      {t:'うるおい・安心・休息',k:'water'},
+      {t:'軽やかさ・自由・ひらめき',k:'wind'}]},
+    {q:'疲れたとき、出やすいのは？',a:[
+      {t:'イライラ・ほてり',k:'fire'},
+      {t:'重だるさ・むくみ',k:'water'},
+      {t:'そわそわ・冷え',k:'wind'}]}
+  ];
+  var TYPES={
+    fire:{name:'あたためを整えるあなた',msg:'内に火を持つあなたは、めぐりを“鎮めて整える”と本来の輝きが戻ります。'},
+    water:{name:'うるおいを湛えるあなた',msg:'やわらかさを持つあなたは、めぐりを“ほどよく動かす”と軽やかになります。'},
+    wind:{name:'めぐりを動かすあなた',msg:'風のように繊細なあなたは、めぐりを“やさしく根づかせる”と安定します。'}
+  };
+  var qi=0, tally={fire:0,water:0,wind:0};
+  function renderQuiz(){
+    var item=QUIZ[qi];
+    document.getElementById('qcount').textContent='QUESTION '+(qi+1)+' / '+QUIZ.length;
+    document.getElementById('qtitle').textContent=item.q;
+    var host=document.getElementById('qchoices');host.innerHTML='';
+    item.a.forEach(function(opt){
+      var b=document.createElement('button');b.className='choice';b.textContent=opt.t;
+      b.onclick=function(){tally[opt.k]++; qi++; if(qi<QUIZ.length)renderQuiz(); else finishQuiz();};
+      host.appendChild(b);
+    });
+  }
+  function topType(){var best='fire',m=-1;for(var k in tally){if(tally[k]>m){m=tally[k];best=k;}}return best;}
+  function finishQuiz(){
+    var t=TYPES[topType()];
+    document.getElementById('cardType').textContent=t.name;
+    document.getElementById('cardMsg').textContent=t.msg;
+    show('s-question'); // 先にギフト③へ、最後にカードでタイプを見せる
+  }
+
+  // 5. 意識・お金の問い
+  var MONEY=[
+    {t:'安心して、ゆだねられること'},
+    {t:'大切な人と、分かち合えること'},
+    {t:'自分を、丁寧に満たせること'},
+    {t:'まだ見ぬ世界へ、ひらいていくこと'}
+  ];
+  var mh=document.getElementById('moneyChoices');
+  MONEY.forEach(function(opt){
+    var b=document.createElement('button');b.className='choice';b.textContent=opt.t;
+    b.onclick=function(){ show('s-card'); };
+    mh.appendChild(b);
+  });
+
+  // s-breath → s-quiz のとき診断を初期化して描画
+  document.getElementById('breathNext').addEventListener('click',function(){qi=0;tally={fire:0,water:0,wind:0};renderQuiz();});
+
+  // ギフトの循環：大切な人へ贈る
+  var giftLink=params.get('giftlink')||(location.origin+location.pathname);
+  var shareText='Be Graceから、あなたへ小さな贈り物を。そっとひらいてみてください。';
+  document.getElementById('shareBtn').onclick=function(){
+    if(navigator.share){
+      navigator.share({title:'Be Grace Gift Box',text:shareText,url:giftLink}).catch(function(){});
+    }else if(navigator.clipboard){
+      navigator.clipboard.writeText(shareText+'\n'+giftLink).then(function(){gToast('贈り物のリンクをコピーしました');},function(){gToast(giftLink);});
+    }else{ gToast('このリンクを贈ってください：'+giftLink); }
+  };
+  var toastEl=document.getElementById('toast'),gtt;
+  function gToast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(gtt);gtt=setTimeout(function(){toastEl.hidden=true;},2400);}
+
+  show('s-open');
+})();
+</script>
+</body>
+</html>
