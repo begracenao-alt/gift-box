@@ -1,344 +1,485 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Be Grace Gift Box</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Be Grace｜Daily Gift</title>
+<meta name="theme-color" content="#3a96bf" />
+<meta name="description" content="毎日ひとつ、心がそっと整う時間を。あなたへの小さなギフト 🤍" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Be Grace｜Daily Gift" />
+<meta property="og:description" content="毎日ひとつ、心がそっと整う時間を。あなたへの小さなギフト 🤍" />
+<meta property="og:image" content="https://begracenao-alt.github.io/gift/ogp.png?v=5" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Be Grace Daily Gift" />
+<meta property="og:url" content="https://begracenao-alt.github.io/gift/" />
+<meta property="og:site_name" content="Be Grace" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Be Grace｜Daily Gift" />
+<meta name="twitter:description" content="毎日ひとつ、心がそっと整う時間を。あなたへの小さなギフト 🤍" />
+<meta name="twitter:image" content="https://begracenao-alt.github.io/gift/ogp.png?v=5" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Be Grace" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
 <style>
-  :root{
-    --ink:#43403a; --soft:#7d776c; --muted:#a8a194;
-    --cream:#fbf6ef; --cream2:#f4ebdd; --gold:#c3a36b; --gold-deep:#a98847;
-    --blue:#84cbe6; --blue-deep:#3a96bf; --line:#ece3d4;
-    --serif:"Noto Serif JP",serif; --sans:"Noto Sans JP",sans-serif; --script:"Cormorant Garamond","Noto Serif JP",serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%}
-  body{font-family:var(--sans);color:var(--ink);
-    background:radial-gradient(120% 70% at 50% 0%,#fff 0%,var(--cream) 55%,var(--cream2) 100%);
-    background-attachment:fixed;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
-  .frame{width:100%;max-width:480px;min-height:100vh;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;padding:34px 26px 44px;position:relative}
+:root{
+  --ink:#3a3b40; --ink-soft:#6f6b6a; --muted:#a59f9c;
+  --bg1:#fbf7f4; --bg2:#eef4f6; --card:#fffdfb;
+  --gold:#c7a36b; --gold-deep:#a9854a; --teal:#5aa8ca; --teal-deep:#3a96bf; --rose:#d9a7ad;
+  --line:#efe7df; --shadow:0 18px 50px rgba(120,110,100,.14);
+  --serif:"Noto Serif JP",serif; --sans:"Noto Sans JP",sans-serif; --script:"Cormorant Garamond","Noto Serif JP",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans);color:var(--ink);font-weight:400;line-height:1.9;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, var(--bg1) 55%, var(--bg1) 100%);
+  background-attachment:fixed;min-height:100vh}
+.wrap{max-width:560px;margin:0 auto;padding:34px 22px 60px}
 
-  .screen{display:none;width:100%;text-align:center;animation:fade .9s ease both}
-  .screen.on{display:block}
-  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* ブランド */
+.brand{text-align:center;margin-bottom:8px}
+.brand-mark{font-family:var(--script);font-style:italic;font-weight:600;font-size:42px;letter-spacing:.02em;color:var(--gold-deep);line-height:1}
+.brand-sub{font-family:var(--script);font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var(--teal-deep);margin-top:6px}
+.brand::after{content:"";display:block;width:46px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.welcome{text-align:center;color:var(--ink-soft);font-size:13.5px;margin:14px 0 22px}
 
-  .brand{font-family:var(--script);font-style:italic;font-size:30px;color:var(--gold-deep);letter-spacing:.02em}
-  .brand-sub{font-family:var(--script);font-size:11px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-top:2px}
-  .lead{font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
-  h1{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.6;margin:0 0 14px}
-  h2{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.6;margin:0 0 12px}
-  p.body{font-size:14px;line-height:2;color:var(--soft);margin:0 auto 8px;max-width:340px}
-  .name{font-family:var(--serif);color:var(--gold-deep)}
+/* ナビ */
+.nav{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.nav button{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-soft);background:rgba(255,255,255,.6);
+  border:1px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer;transition:all .2s ease}
+.nav button.active{background:#fff;color:var(--teal-deep);border-color:#cfe4ec;box-shadow:0 6px 18px rgba(58,150,191,.14);font-weight:700}
 
-  .btn{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.06em;border:none;cursor:pointer;
-    padding:15px 34px;border-radius:999px;color:#fff;margin-top:26px;
-    background:linear-gradient(135deg,var(--gold),var(--gold-deep));box-shadow:0 12px 26px -12px rgba(150,120,60,.7);
-    transition:transform .15s,filter .2s}
-  .btn:active{transform:scale(.96)}
-  .btn.soft{background:none;color:var(--soft);box-shadow:none;padding:12px;font-weight:500;font-size:12.5px;letter-spacing:.04em}
-  .btn.line{background:none;color:var(--gold-deep);border:1px solid var(--gold);box-shadow:none}
+/* カード */
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:30px 26px;margin-bottom:18px;animation:rise .6s ease}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.date{text-align:center;font-family:var(--script);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--gold-deep)}
+.greet{text-align:center;font-family:var(--serif);font-size:19px;font-weight:500;margin-top:4px;color:var(--ink)}
 
-  /* ギフトボックス */
-  .box-wrap{margin:10px auto 6px;width:200px;height:200px;position:relative;cursor:pointer}
-  .box{position:absolute;left:30px;top:70px;width:140px;height:110px;border-radius:10px;
-    background:linear-gradient(135deg,#fbf3e6,#f0e0c6);box-shadow:0 18px 40px -16px rgba(150,110,50,.55)}
-  .lid{position:absolute;left:18px;top:54px;width:164px;height:46px;border-radius:10px;
-    background:linear-gradient(135deg,#f7ecd8,#ecd9b8);box-shadow:0 8px 18px -8px rgba(150,110,50,.5);
-    transform-origin:center bottom;transition:transform 1s cubic-bezier(.5,-0.3,.3,1.3),opacity .8s}
-  .ribbon-v{position:absolute;left:92px;top:54px;width:16px;height:126px;background:linear-gradient(180deg,var(--gold),var(--gold-deep));border-radius:3px}
-  .bow{position:absolute;left:73px;top:38px;width:54px;height:34px;transition:transform .8s,opacity .8s}
-  .bow::before,.bow::after{content:"";position:absolute;top:0;width:26px;height:34px;border-radius:60% 60% 40% 40%;
-    background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
-  .bow::before{left:0;transform:rotate(-18deg)}
-  .bow::after{right:0;transform:rotate(18deg)}
-  .glow{position:absolute;left:50%;top:60%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(255,244,214,.95),rgba(255,244,214,0) 70%);transition:width 1s,height 1s;pointer-events:none}
-  .box-wrap.open .lid{transform:translateY(-40px) rotate(-12deg);opacity:0}
-  .box-wrap.open .bow{transform:translateY(-60px) scale(.6);opacity:0}
-  .box-wrap.open .glow{width:300px;height:300px}
-  .tap-hint{font-size:12px;color:var(--muted);letter-spacing:.1em;margin-top:6px;animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.streak{display:flex;align-items:center;justify-content:center;gap:10px;margin:18px 0 2px}
+.streak .num{font-family:var(--serif);font-size:30px;color:var(--teal-deep);font-weight:600;line-height:1}
+.streak .lbl{font-size:12.5px;color:var(--muted)}
 
-  /* 呼吸 */
-  .breath{margin:24px auto;width:230px;height:230px;display:flex;align-items:center;justify-content:center;position:relative}
-  .breath .ring{position:absolute;width:120px;height:120px;border-radius:50%;
-    background:radial-gradient(circle,rgba(132,203,230,.5),rgba(132,203,230,.08) 70%);
-    border:1px solid rgba(58,150,191,.25);transition:transform 4.8s ease-in-out}
-  .breath.inhale .ring{transform:scale(1.7)}
-  .breath.exhale .ring{transform:scale(1)}
-  .breath .word{font-family:var(--serif);font-size:18px;color:var(--blue-deep);z-index:2}
+.eyebrow{text-align:center;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:14px}
+.word{font-family:var(--serif);font-size:21px;font-weight:500;line-height:2;text-align:center;color:var(--ink);animation:fade 1.1s ease}
+@keyframes fade{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:none}}
+.word-foot{text-align:center;font-family:var(--script);font-style:italic;font-size:15px;color:var(--gold-deep);margin-top:18px}
+.backup-note{text-align:center;font-size:12px;line-height:1.7;color:var(--muted);margin-bottom:16px}
+.gift-door{display:block;text-align:center;margin-top:20px;font-size:12px;letter-spacing:.18em;color:var(--gold-deep);text-decoration:none;opacity:.75;transition:opacity .3s}
+.gift-door:hover{opacity:1}
 
-  /* 診断・問い */
-  .choices{display:flex;flex-direction:column;gap:11px;margin:22px auto 0;max-width:360px}
-  .choice{font-family:var(--sans);font-size:14.5px;font-weight:500;text-align:left;padding:15px 20px;border-radius:16px;
-    border:1px solid var(--line);background:rgba(255,255,255,.7);color:var(--ink);cursor:pointer;transition:.15s;line-height:1.6}
-  .choice:hover{border-color:var(--gold)}
-  .choice:active{transform:scale(.985);background:#fff}
+.btn{display:block;width:100%;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.06em;color:#fff;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep));border:none;border-radius:999px;padding:15px;cursor:pointer;
+  box-shadow:0 12px 26px rgba(58,150,191,.26);transition:filter .2s ease,transform .1s ease}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:scale(.99)}
+.btn.soft{background:#fff;color:var(--teal-deep);border:1px solid #cfe4ec;box-shadow:none}
 
-  .qcount{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:10px}
+.prompt{font-family:var(--serif);font-size:16px;text-align:center;color:var(--ink);margin-bottom:14px}
+textarea{font-family:var(--sans);font-size:14px;line-height:1.8;width:100%;min-height:90px;border:1px solid var(--line);
+  border-radius:16px;background:#fbf8f5;padding:14px 16px;color:var(--ink);resize:vertical}
+textarea:focus{outline:none;border-color:var(--gold);background:#fff}
+.saved-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;min-height:16px}
 
-  /* ギフトカード */
-  .gcard{margin:18px auto 0;max-width:360px;background:linear-gradient(160deg,#fffdf9,#f6ecdb);
-    border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:0 22px 50px -24px rgba(150,110,50,.5);position:relative}
-  .gcard::before{content:"";position:absolute;inset:9px;border:1px solid rgba(195,163,107,.4);border-radius:16px;pointer-events:none}
-  .gcard .to{font-size:12px;color:var(--soft);letter-spacing:.1em}
-  .gcard .type{font-family:var(--serif);font-size:21px;color:var(--gold-deep);margin:12px 0}
-  .gcard .msg{font-size:13.5px;line-height:2;color:var(--soft)}
-  .gcard .sign{font-family:var(--script);font-style:italic;font-size:20px;color:var(--gold-deep);margin-top:18px}
+/* 宝箱 */
+.box-item{border-bottom:1px solid var(--line);padding:16px 2px}
+.box-item:last-child{border-bottom:none}
+.box-date{font-family:var(--script);font-style:italic;font-size:13px;color:var(--gold-deep);letter-spacing:.04em}
+.box-word{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin-top:3px;line-height:1.8}
+.box-journal{font-size:13px;color:var(--ink-soft);margin-top:6px;white-space:pre-wrap;background:#fbf8f5;border-radius:12px;padding:10px 12px}
+.empty{text-align:center;color:var(--muted);font-size:13px;padding:30px 10px}
 
-  .dots{display:flex;gap:7px;justify-content:center;margin-top:30px}
-  .dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:.3s}
-  .dots i.on{background:var(--gold);transform:scale(1.4)}
+/* 呼吸 */
+.breath-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px}
+.breath-circle{width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%, rgba(120,200,224,.5), rgba(58,150,191,.22));
+  box-shadow:0 0 50px rgba(90,168,202,.3);transition:transform 4s ease-in-out;transform:scale(.6)}
+.breath-circle.in{transform:scale(1.15)}
+.breath-circle.hold{transform:scale(1.15)}
+.breath-text{font-family:var(--serif);font-size:20px;color:var(--teal-deep);margin-top:26px;min-height:30px;letter-spacing:.1em}
+.breath-count{font-family:var(--serif);font-size:38px;font-weight:500;color:var(--gold-deep);margin-top:4px;min-height:46px;line-height:1}
+.foot{text-align:center;font-family:var(--script);font-style:italic;font-size:14px;color:var(--muted);margin-top:24px}
+.hidden{display:none!important}
 
-  .divider{width:44px;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-
-  /* ギフトの循環 */
-  .cycle{margin:22px auto;max-width:330px;display:flex;flex-direction:column;align-items:center;gap:4px}
-  .cyc{width:100%;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:14px;
-    padding:12px 16px;font-size:13.5px;color:var(--soft)}
-  .cyc .sub{display:block;font-size:11px;color:var(--muted);margin-top:2px}
-  .cyc.gold{background:linear-gradient(135deg,#fffaf0,#f6ecd8);border-color:#e8d6ab;color:var(--gold-deep);font-weight:600}
-  .cyc.gold b{color:var(--gold-deep)}
-  .arr{color:var(--gold);font-size:14px}
-
-  /* トースト */
-  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
-    padding:11px 22px;border-radius:999px;font-size:13px;z-index:200;box-shadow:0 8px 28px rgba(80,60,30,.3)}
-  .toast[hidden]{display:none}
+/* 開封ゲート */
+.gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 80% at 50% 38%, #f5efe9, #eaf2f5);transition:opacity .65s ease}
+.gate-inner{text-align:center;animation:rise .9s ease}
+.gate-title{font-family:var(--script);font-style:italic;font-weight:600;font-size:34px;color:var(--gold-deep);line-height:1}
+.gate-sub{font-family:var(--script);font-size:12px;letter-spacing:.5em;text-transform:uppercase;color:var(--teal-deep);margin:8px 0 36px}
+.giftbox{position:relative;width:184px;height:150px;margin:0 auto;cursor:pointer;animation:float 3.4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.gb-base{position:absolute;bottom:0;left:17px;width:150px;height:104px;border-radius:12px;
+  background:linear-gradient(160deg,#7cc6df,#3a96bf);box-shadow:0 18px 40px rgba(58,150,191,.34)}
+.gb-rv{position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:100%;background:linear-gradient(180deg,#e0c084,#c7a36b)}
+.gb-lid{position:absolute;top:26px;left:0;width:184px;height:48px;border-radius:12px;
+  background:linear-gradient(160deg,#8fd0e6,#4ea2c7);box-shadow:0 10px 22px rgba(58,150,191,.3);z-index:2;
+  transition:transform 1s cubic-bezier(.3,.85,.25,1),opacity 1s ease}
+.gb-bow{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:70px;height:34px}
+.gb-bow::before,.gb-bow::after{content:"";position:absolute;top:0;width:32px;height:34px;border-radius:50%;
+  background:linear-gradient(160deg,#e6c98e,#c7a36b);box-shadow:0 3px 8px rgba(168,133,74,.35)}
+.gb-bow::before{left:0;transform:rotate(-20deg)}
+.gb-bow::after{right:0;transform:rotate(20deg)}
+.gb-knot{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(160deg,#efd9a6,#c7a36b);z-index:3;box-shadow:0 3px 8px rgba(168,133,74,.4)}
+.gate-hint{margin-top:34px;font-size:13px;color:var(--muted);letter-spacing:.1em;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+.gate.open .giftbox{animation:none}
+.gate.open .gb-lid{transform:translateY(-180px) rotate(-12deg);opacity:0}
+.gate.open .gb-base{box-shadow:0 0 70px rgba(130,205,228,.7);transform:scale(1.05);transition:all 1s ease}
+.gate.open .gate-hint{opacity:0;transition:opacity .4s}
 </style>
 </head>
 <body>
-<div class="frame">
-
-  <!-- 1. 箱を開ける -->
-  <section class="screen on" id="s-open">
-    <div class="brand">Be Grace</div>
-    <div class="brand-sub">Gift Box</div>
-    <div class="divider"></div>
-    <p class="body" style="margin-bottom:6px"><span class="name" id="nm1">あなた</span>さんへ</p>
-    <div class="box-wrap" id="boxWrap">
-      <div class="glow"></div>
-      <div class="box"></div>
-      <div class="ribbon-v"></div>
-      <div class="lid"></div>
-      <div class="bow"></div>
+<div class="gate" id="gate">
+  <div class="gate-inner">
+    <div class="gate-title">Be Grace</div>
+    <div class="gate-sub">A Gift for You</div>
+    <div class="giftbox" id="giftbox">
+      <div class="gb-lid"><div class="gb-bow"></div><div class="gb-knot"></div></div>
+      <div class="gb-base"><div class="gb-rv"></div></div>
     </div>
-    <div class="tap-hint" id="tapHint">そっと、タップして開けてください</div>
-  </section>
-
-  <!-- 2. ようこそ（個別の余韻） -->
-  <section class="screen" id="s-welcome">
-    <div class="lead">Welcome</div>
-    <h1>個別相談、<br>ありがとうございました。</h1>
-    <p class="body">お話できた時間が、わたしはとても嬉しかったです。<br>今日は、その続きの小さな贈り物を3つ。</p>
-    <p class="body">どれも、触れて・感じて、1〜2分。<br>Be Graceの世界を、ひと口だけ味わってください。</p>
-    <button class="btn" data-go="s-breath">贈り物をひらく</button>
-  </section>
-
-  <!-- 3. ギフト①：整える呼吸（カラダ） -->
-  <section class="screen" id="s-breath">
-    <div class="lead">Gift 1 ／ カラダ</div>
-    <h2>整える、ひと呼吸</h2>
-    <p class="body" id="breathGuide">光に合わせて、ゆっくり吸って、ゆっくり吐いて。</p>
-    <div class="breath" id="breath"><div class="ring"></div><div class="word" id="breathWord">はじめます</div></div>
-    <button class="btn" id="breathStart">はじめる</button>
-    <button class="btn soft" data-go="s-quiz" id="breathNext" style="display:none">つぎへ ›</button>
-  </section>
-
-  <!-- 4. ギフト②：自分を知る（ミニ診断） -->
-  <section class="screen" id="s-quiz">
-    <div class="lead">Gift 2 ／ 自分を知る</div>
-    <div class="qcount" id="qcount">QUESTION 1 / 3</div>
-    <h2 id="qtitle"></h2>
-    <div class="choices" id="qchoices"></div>
-  </section>
-
-  <!-- 5. ギフト③：意識・お金の問い -->
-  <section class="screen" id="s-question">
-    <div class="lead">Gift 3 ／ 意識</div>
-    <h2>ひとつ、美しい問い。</h2>
-    <p class="body">もし“お金”が、あなたの意識の質をうつす鏡だとしたら——<br>いま、いちばん大切にしたいのは？</p>
-    <div class="choices" id="moneyChoices"></div>
-  </section>
-
-  <!-- 6. ギフトカード（持ち帰り） -->
-  <section class="screen" id="s-card">
-    <div class="lead">あなたへの贈り物</div>
-    <div class="gcard">
-      <div class="to"><span class="name" id="nm2">あなた</span> さんへ</div>
-      <div class="type" id="cardType">めぐるあなた</div>
-      <div class="msg" id="cardMsg"></div>
-      <div class="sign">Be Grace</div>
-    </div>
-    <p class="body" style="font-size:12px;color:var(--muted);margin-top:14px">この画面はスクリーンショットで持ち帰れます 📷</p>
-    <button class="btn" data-go="s-bridge">さいごに</button>
-  </section>
-
-  <!-- 7. 本講座への橋渡し -->
-  <section class="screen" id="s-bridge">
-    <div class="lead">Be Grace</div>
-    <h1>これは、ほんの入り口。</h1>
-    <p class="body">今日のひと口を、本当の変化に変えていく場所があります。<br>本講座では、あなたの“整う”を半年かけて深めていきます。</p>
-    <div class="divider"></div>
-    <button class="btn soft" data-go="s-circulate">つぎへ ›</button>
-  </section>
-
-  <!-- 8. ギフトの循環 -->
-  <section class="screen" id="s-circulate">
-    <div class="lead">Gift Circulation</div>
-    <h1>受け取ったら、<br>誰かへ。</h1>
-    <p class="body">このひとときが心に触れたなら、<br>あなたの大切な人にも、そっと贈ってみませんか。</p>
-    <div class="cycle">
-      <div class="cyc">あなたが受け取る</div>
-      <div class="arr">↓</div>
-      <div class="cyc">大切な人へ贈る</div>
-      <div class="arr">↓</div>
-      <div class="cyc">その人がBe Graceと出会う<span class="sub">（セミナー・個別相談）</span></div>
-      <div class="arr">↓</div>
-      <div class="cyc gold">あなたへ <b>Secret Gift</b> が届く</div>
-    </div>
-    <p class="body" style="font-size:12.5px;color:var(--muted)">紹介でもポイントでもなく、めぐっていく贈り物として。<br>あなたの「よかった」が、誰かの「はじまり」になりますように。</p>
-    <button class="btn" id="shareBtn">大切な人へ贈る</button><br>
-    <button class="btn soft" data-go="s-open">とじる</button>
-  </section>
-
-  <div class="dots" id="dots"></div>
+    <div class="gate-hint">タップして、そっと開けてください</div>
+  </div>
 </div>
-<div class="toast" id="toast" hidden></div>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-mark">Be Grace</div>
+    <div class="brand-sub">Daily Gift</div>
+  </div>
+  <div class="welcome">ようこそ。<br>カラダがゆるむと、心もほどけていく。<br>一日ひとつ、あなたを整える小さな時間を 🤍</div>
+
+  <div class="nav" id="nav">
+    <button data-t="today" class="active">今日</button>
+    <button data-t="box">ことばの宝箱</button>
+    <button data-t="breath">ひと呼吸</button>
+  </div>
+
+  <div id="view"></div>
+  <div class="foot">— for you, with grace —</div>
+</div>
 
 <script>
 (function(){
-  // 名前（?name=○○ で差し込み可）
-  var params=new URLSearchParams(location.search);
-  var name=params.get('name')||'';
-  if(name){document.getElementById('nm1').textContent=name;document.getElementById('nm2').textContent=name;}
-  // 本講座/個別リンク（?course= , ?line= で差し込み可）。未設定はプレースホルダ
-  var course=params.get('course')||'#', line=params.get('line')||'#';
+  var KEY='begrace_daily_gift_v1';
+  var SHARE_URL='https://begracenao-alt.github.io/gift/?g=2'; // 配布用ギフトURL（LINEキャッシュ回避の印つき。自分のドメインができたら差し替え）
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  var state=load();
+  if(!state.received) state.received={}; // {date: wordIndex}
+  if(!state.journal)  state.journal={};  // {date: text}
 
-  var screens=['s-open','s-welcome','s-breath','s-quiz','s-question','s-card','s-bridge','s-circulate'];
-  var dotsHost=document.getElementById('dots');
-  screens.forEach(function(){var i=document.createElement('i');dotsHost.appendChild(i);});
-  function show(idOrName){
-    var id=idOrName;
-    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
-    var el=document.getElementById(id);el.classList.add('on');
-    window.scrollTo(0,0);
-    var idx=screens.indexOf(id);
-    dotsHost.querySelectorAll('i').forEach(function(d,i){d.classList.toggle('on',i===idx);});
+  // 開封ゲート（初回はギフトボックスを開ける演出）
+  var gate=document.getElementById('gate');
+  function openGift(){
+    if(gate.getAttribute('data-done'))return;
+    gate.setAttribute('data-done','1');
+    gate.classList.add('open');
+    state.opened=true; save();
+    setTimeout(function(){gate.style.opacity='0';},1150);
+    setTimeout(function(){gate.style.display='none';},1800);
   }
-  document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){show(b.dataset.go);};});
+  if(state.opened){gate.style.display='none';}
+  else{gate.onclick=openGift;}
 
-  // 1. 箱をひらく
-  var boxWrap=document.getElementById('boxWrap');
-  boxWrap.onclick=function(){
-    if(boxWrap.classList.contains('open'))return;
-    boxWrap.classList.add('open');
-    document.getElementById('tapHint').style.opacity='0';
-    setTimeout(function(){show('s-welcome');},1100);
-  };
-
-  // 3. 呼吸
-  var breath=document.getElementById('breath'), bword=document.getElementById('breathWord');
-  var bguide=document.getElementById('breathGuide');
-  var breathTimer=null, cycle=0;
-  document.getElementById('breathStart').onclick=function(){
-    this.style.display='none'; cycle=0; runBreath();
-  };
-  function runBreath(){
-    // 吸う(5s)→吐く(5s) を3回
-    function inhale(){breath.classList.add('inhale');breath.classList.remove('exhale');bword.textContent='吸って…';}
-    function exhale(){breath.classList.remove('inhale');breath.classList.add('exhale');bword.textContent='吐いて…';}
-    inhale();
-    var phase=0;
-    breathTimer=setInterval(function(){
-      phase++;
-      if(phase%2===1){exhale();}
-      else{cycle++; if(cycle>=3){clearInterval(breathTimer);finishBreath();return;} inhale();}
-    },5000);
-  }
-  function finishBreath(){
-    breath.classList.remove('inhale','exhale');
-    bword.textContent='ふぅ…';
-    bguide.textContent='整いましたね。この感覚が、Be Graceの入り口です。';
-    document.getElementById('breathNext').style.display='inline-block';
-  }
-
-  // 4. ミニ診断（※プレースホルダ。本物の体質診断に差し替え可）
-  var QUIZ=[
-    {q:'朝、目が覚めたときの自分は？',a:[
-      {t:'すっと動ける・活動的',k:'fire'},
-      {t:'ゆっくり・あたたまるまで時間がいる',k:'water'},
-      {t:'日によってムラがある',k:'wind'}]},
-    {q:'いま、いちばん欲しいものは？',a:[
-      {t:'前に進む力・情熱',k:'fire'},
-      {t:'うるおい・安心・休息',k:'water'},
-      {t:'軽やかさ・自由・ひらめき',k:'wind'}]},
-    {q:'疲れたとき、出やすいのは？',a:[
-      {t:'イライラ・ほてり',k:'fire'},
-      {t:'重だるさ・むくみ',k:'water'},
-      {t:'そわそわ・冷え',k:'wind'}]}
+  var WORDS=[
+    "今日が、あなたの最初の1日。",
+    "整えるほど、人生はやさしくめぐりだす。",
+    "出すのが先。手放すほど、両手はやさしいもので満ちていく。",
+    "「やる」から、やる気は生まれる。まず小さく、ひとつだけ。",
+    "小さな「できた」の積み重ねが、自分を信じる力になる。",
+    "整える時間は、後回しにせず、先に置いておくもの。",
+    "美しさは、自分をやさしく扱う、その姿勢から。",
+    "感じるほど、豊かさは受け取りやすくなる。",
+    "カラダがゆるむと、心に余白が生まれる。",
+    "あなたは今、本来のあなたに還っていい。",
+    "“やりたい”で動くと、人は軽やかに進む。",
+    "余白があるから、新しい流れが入ってくる。",
+    "比べるなら、誰かとではなく、昨日のあなたと。",
+    "今日ほっとした瞬間を、ひとつ、そっと味わう。",
+    "心地よさは、あなたのいちばん正しい羅針盤。",
+    "満ちているあなたから、今日を始めよう。",
+    "ひと呼吸で、あなたはちゃんと、ととのう。",
+    "受け取る力は、感じる力から育っていく。",
+    "あなたはもう、十分に美しい。",
+    "ゆるめるほど、本来の輝きが、ふっと現れる。",
+    "カラダは、いつもあなたの味方。やさしく扱おう。",
+    "あなたが触れられるのは、いつも“今この瞬間”だけ。",
+    "静けさから動くと、同じ一歩でも、遠くまで行ける。",
+    "決めつけをそっとほどくと、可能性がひらく。",
+    "あなたの「好き」は、最高の自己投資。",
+    "流れていることが、元気の源。呼吸も、巡りも。",
+    "完璧よりも、心地よい一瞬を、たくさん。",
+    "自分を大切にする時間は、人生のやさしい土台。",
+    "問いを置くだけで、答えはやさしく近づいてくる。",
+    "今日のあなたに、花マルをあげていい。",
+    "安心したカラダが、本当に欲しいものを教えてくれる。",
+    "手放すと決めた瞬間から、巡りは動き出す。",
+    "あなたの毎日に、ちゃんと豊かさは流れている。",
+    "やさしさは、まず自分に。そこから、めぐっていく。",
+    "整っているほど、あなたも、まわりも、うるおう。",
+    "明日もまた、ここで、自分を整えにこよう。",
+    "今日のカラダの声を、そっと聞いてみる。",
+    "ゆるめた分だけ、本来の自分に近づいていく。",
+    "深い呼吸ひとつで、世界の見え方は変わる。",
+    "あなたの内側には、もう答えがある。",
+    "「やってみよう」の一歩から、世界はひらく。",
+    "丁寧に扱うほど、カラダはやさしく応えてくれる。",
+    "焦らなくていい。流れは、ちゃんとあなたを運んでいる。",
+    "今ここにいるだけで、あなたには価値がある。",
+    "ゆるすたびに、心は軽くなっていく。",
+    "あなたが整うと、まわりの空気までやわらかくなる。",
+    "小さな心地よさを選ぶことが、人生をやさしく変えていく。",
+    "受け取っていい。あなたは、もう十分がんばってきた。",
+    "思い込みをひとつほどくと、視界がひらける。",
+    "あたたかいお茶を注ぐように、自分にやさしさを。",
+    "あなたのペースが、いちばん自然で、美しい。",
+    "巡りがよくなると、心も自然と前を向く。",
+    "「ありがとう」を口にするほど、豊かさはめぐる。",
+    "肩の力をふっと抜くと、本来の流れが戻ってくる。",
+    "あなたは、今この瞬間から、変わっていける。",
+    "満たされた感覚から選ぶと、いつも、ちょうどいい。",
+    "今日も、あなたはあなたのままで大丈夫。",
+    "カラダがゆるむと、未来までやさしく見えてくる。",
+    "自分を信じる練習を、今日もひとつ。",
+    "あなたの願いは、もう叶う方へ動き出している。",
+    "首が整うと、人生が整う。",
+    "潜在意識を変えたいときこそ、まずカラダから。",
+    "「もう守らなくていいよ」と、カラダにそっと伝えてあげる。",
+    "「私はこういう人だから」と、決めつけなくて大丈夫。",
+    "私たちは、いつでも変わっていける。",
+    "感じている間は、不安はおやすみする。だから、感じる時間を。",
+    "壁や揺れは、現実が動きはじめたサイン。",
+    "カラダは、あなたが本当はどうしたいかを、教えてくれる。",
+    "整えるのは、未来を変えるいちばん近い道。"
   ];
-  var TYPES={
-    fire:{name:'あたためを整えるあなた',msg:'内に火を持つあなたは、めぐりを“鎮めて整える”と本来の輝きが戻ります。'},
-    water:{name:'うるおいを湛えるあなた',msg:'やわらかさを持つあなたは、めぐりを“ほどよく動かす”と軽やかになります。'},
-    wind:{name:'めぐりを動かすあなた',msg:'風のように繊細なあなたは、めぐりを“やさしく根づかせる”と安定します。'}
+  // テーマごとの問い（その日のことばと同じテーマの問いが出る＝響き合う）
+  var THEME_Q={
+    self:    "今日、自分にかけたいやさしい言葉は？",
+    grati:   "今日、ありがとうと思えたこと。",
+    body:    "カラダが今、欲しているものは？",
+    release: "そっと手放したい思いを、ひとつ。",
+    savor:   "今日、心地よかった瞬間をひとつ。",
+    fullness:"いま、満たされている部分はどこ？",
+    beauty:  "あなたが「美しいな」と感じたもの。",
+    rest:    "今のあなたに必要な休みは？",
+    future:  "明日の自分に、贈りたい言葉。",
+    proud:   "今日の自分に100点をあげるなら、どんな理由？",
+    step:    "小さく整えたいことを、ひとつだけ。",
+    now:     "今、ふっと感じている感覚を、ひとつ。",
+    flow:    "今、流れに乗れている感じはある？",
+    change:  "いま、そっとほどきたい思い込みは？",
+    connect: "大切な人へ、心の中のひとこと。"
   };
-  var qi=0, tally={fire:0,water:0,wind:0};
-  function renderQuiz(){
-    var item=QUIZ[qi];
-    document.getElementById('qcount').textContent='QUESTION '+(qi+1)+' / '+QUIZ.length;
-    document.getElementById('qtitle').textContent=item.q;
-    var host=document.getElementById('qchoices');host.innerHTML='';
-    item.a.forEach(function(opt){
-      var b=document.createElement('button');b.className='choice';b.textContent=opt.t;
-      b.onclick=function(){tally[opt.k]++; qi++; if(qi<QUIZ.length)renderQuiz(); else finishQuiz();};
-      host.appendChild(b);
-    });
-  }
-  function topType(){var best='fire',m=-1;for(var k in tally){if(tally[k]>m){m=tally[k];best=k;}}return best;}
-  function finishQuiz(){
-    var t=TYPES[topType()];
-    document.getElementById('cardType').textContent=t.name;
-    document.getElementById('cardMsg').textContent=t.msg;
-    show('s-question'); // 先にギフト③へ、最後にカードでタイプを見せる
+  // 各ことばのテーマ（WORDSと同じ並び。ことばと問いを同じテーマで響かせる）
+  var WTHEME=["step","flow","release","step","proud","step","beauty","fullness","rest","self","step","rest","proud","savor","savor","fullness","now","fullness","beauty","rest","body","now","step","change","savor","flow","savor","self","change","proud","body","release","fullness","self","flow","future","body","rest","now","change","step","body","flow","self","release","connect","savor","fullness","change","self","beauty","flow","grati","rest","change","fullness","self","future","proud","future","body","body","release","change","change","now","change","body","future"];
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function todayISO(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function dayOfYear(d){var s=new Date(d.getFullYear(),0,0);return Math.floor((d-s)/86400000);}
+  function wordIndexFor(d){return dayOfYear(d)%WORDS.length;}
+  function promptFor(d){var i=wordIndexFor(d);var t=WTHEME[i]||"self";return THEME_Q[t]||THEME_Q.self;}
+  function greet(){var h=new Date().getHours();return h<5?'こんばんは':h<11?'おはようございます':h<18?'こんにちは':'こんばんは';}
+  function fmtDate(iso){var p=(iso||'').split('-');if(p.length<3)return iso;return (+p[1])+'月'+(+p[2])+'日';}
+  function streak(){
+    var c=0,d=new Date();
+    for(;;){var iso=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+      if(state.received[iso]!==undefined){c++;d.setDate(d.getDate()-1);}else break;}
+    return c;
   }
 
-  // 5. 意識・お金の問い
-  var MONEY=[
-    {t:'安心して、ゆだねられること'},
-    {t:'大切な人と、分かち合えること'},
-    {t:'自分を、丁寧に満たせること'},
-    {t:'まだ見ぬ世界へ、ひらいていくこと'}
-  ];
-  var mh=document.getElementById('moneyChoices');
-  MONEY.forEach(function(opt){
-    var b=document.createElement('button');b.className='choice';b.textContent=opt.t;
-    b.onclick=function(){ show('s-card'); };
-    mh.appendChild(b);
+  var view=document.getElementById('view'), tab='today', breathTimer=null;
+  document.querySelectorAll('#nav button').forEach(function(b){
+    b.onclick=function(){document.querySelectorAll('#nav button').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');tab=b.dataset.t;render();};
   });
 
-  // s-breath → s-quiz のとき診断を初期化して描画
-  document.getElementById('breathNext').addEventListener('click',function(){qi=0;tally={fire:0,water:0,wind:0};renderQuiz();});
+  function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-  // ギフトの循環：大切な人へ贈る
-  var giftLink=params.get('giftlink')||(location.origin+location.pathname);
-  var shareText='Be Graceから、あなたへ小さな贈り物を。そっとひらいてみてください。';
-  document.getElementById('shareBtn').onclick=function(){
-    if(navigator.share){
-      navigator.share({title:'Be Grace Gift Box',text:shareText,url:giftLink}).catch(function(){});
-    }else if(navigator.clipboard){
-      navigator.clipboard.writeText(shareText+'\n'+giftLink).then(function(){gToast('贈り物のリンクをコピーしました');},function(){gToast(giftLink);});
-    }else{ gToast('このリンクを贈ってください：'+giftLink); }
-  };
-  var toastEl=document.getElementById('toast'),gtt;
-  function gToast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(gtt);gtt=setTimeout(function(){toastEl.hidden=true;},2400);}
+  function render(){
+    view.innerHTML='';
+    if(tab==='today') return renderToday();
+    if(tab==='box')   return renderBox();
+    if(tab==='breath')return renderBreath();
+  }
 
-  show('s-open');
+  function renderToday(){
+    var today=todayISO();
+    var card=el('div','card');
+    var nd=new Date(),wd=['日','月','火','水','木','金','土'][nd.getDay()];
+    card.appendChild(el('div','date',(nd.getMonth()+1)+'月'+nd.getDate()+'日（'+wd+'）'));
+    card.appendChild(el('div','greet',greet()));
+    var s=streak();
+    if(s>0){
+      var st=el('div','streak','<span class="num">'+s+'</span><span class="lbl">日連続で、<br>自分を整えています</span>');
+      card.appendChild(st);
+    }
+    view.appendChild(card);
+
+    var wcard=el('div','card');
+    wcard.appendChild(el('div','eyebrow','今日のことば'));
+    if(state.received[today]!==undefined){
+      wcard.appendChild(el('div','word',esc(WORDS[state.received[today]])));
+      wcard.appendChild(el('div','word-foot','— 今日のあなたへ —'));
+    }else{
+      var teaser=el('div','word');teaser.style.color='var(--muted)';teaser.style.fontSize='17px';teaser.style.letterSpacing='0.02em';teaser.innerHTML='そっと深呼吸して、<br>今日の言葉を受け取ってください。';
+      wcard.appendChild(teaser);
+      var btn=el('button','btn','今日のことばを受け取る');
+      btn.style.marginTop='22px';
+      btn.onclick=function(){state.received[today]=wordIndexFor(new Date());save();render();};
+      wcard.appendChild(btn);
+    }
+    view.appendChild(wcard);
+
+    // 今日の小さな問い
+    var jcard=el('div','card');
+    jcard.appendChild(el('div','eyebrow','今日の小さな問い'));
+    jcard.appendChild(el('div','prompt',esc(promptFor(new Date()))));
+    var ta=el('textarea');ta.placeholder='一行だけでも。あなたの正直な気持ちを。';ta.value=state.journal[today]||'';
+    var note=el('div','saved-note','');
+    var tmr;
+    ta.oninput=function(){state.journal[today]=ta.value;save();note.textContent='そっと保存しました 🤍';clearTimeout(tmr);tmr=setTimeout(function(){note.textContent='';},1500);};
+    jcard.appendChild(ta);jcard.appendChild(note);
+    view.appendChild(jcard);
+  }
+
+  function appendShare(){
+    var card=el('div','card');
+    card.appendChild(el('div','word','このギフトは<br>大切な人にも贈れます 🤍'));
+    var b=el('button','btn','🎁 大切な人に贈る');b.style.marginTop='22px';
+    b.onclick=function(){
+      var msg='🎁 あなたへ、Be Grace からの小さなギフト。\nカラダと心に、そっと余白をつくりにきてね🤍'+(SHARE_URL?('\n'+SHARE_URL):'');
+      if(navigator.share){navigator.share({title:'Be Grace｜Daily Gift',text:msg}).catch(function(){});return;}
+      var t=document.createElement('textarea');t.value=msg;document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);
+      var o=b.textContent;b.textContent='コピーしました 🤍';setTimeout(function(){b.textContent=o;},1700);
+    };
+    card.appendChild(b);
+    view.appendChild(card);
+  }
+  function appendReplay(){
+    var w=el('div');w.style.textAlign='center';w.style.margin='6px 0 0';
+    var b=el('button','btn soft','🎁 ギフトをもう一度開ける');
+    b.onclick=function(){state.opened=false;save();location.reload();};
+    w.appendChild(b);view.appendChild(w);
+  }
+  function appendBackup(){
+    var card=el('div','card');
+    card.appendChild(el('div','eyebrow','バックアップ'));
+    card.appendChild(el('div','backup-note','機種変更のときは「書き出し」で保存 → 新しい端末で「戻す」と、宝箱まるごと引き継げます 🤍'));
+    var ex=el('button','btn soft','書き出して保存');
+    ex.onclick=function(){
+      var blob=new Blob([JSON.stringify(state)],{type:'application/json'});
+      var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+      a.download='be-grace-gift-backup.json';document.body.appendChild(a);a.click();
+      setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},100);
+    };
+    var imp=el('button','btn soft','戻す（読み込み）');imp.style.marginTop='10px';
+    var fi=el('input');fi.type='file';fi.accept='application/json,.json';fi.style.display='none';
+    imp.onclick=function(){fi.click();};
+    fi.onchange=function(){
+      var f=fi.files&&fi.files[0];if(!f)return;
+      var r=new FileReader();
+      r.onload=function(){
+        try{
+          var data=JSON.parse(r.result);
+          if(data&&typeof data==='object'){
+            if(!state.received)state.received={};if(!state.journal)state.journal={};
+            var k;for(k in (data.received||{}))state.received[k]=data.received[k];
+            for(k in (data.journal||{}))state.journal[k]=data.journal[k];
+            state.opened=true;save();imp.textContent='戻しました 🤍';render();
+          }
+        }catch(e){imp.textContent='読み込めませんでした';setTimeout(function(){imp.textContent='戻す（読み込み）';},1800);}
+      };
+      r.readAsText(f);
+    };
+    card.appendChild(ex);card.appendChild(imp);card.appendChild(fi);
+    view.appendChild(card);
+  }
+  function renderBox(){
+    var card=el('div','card');
+    card.appendChild(el('div','eyebrow','ことばの宝箱'));
+    var dates=Object.keys(state.received).sort(function(a,b){return b.localeCompare(a);});
+    if(!dates.length){
+      card.appendChild(el('div','empty','まだ空っぽです。<br>「今日」で最初のことばを受け取ってください 🤍'));
+      view.appendChild(card);appendShare();appendReplay();appendBackup();return;
+    }
+    card.appendChild(el('div','streak','<span class="num">'+dates.length+'</span><span class="lbl">個のことばを<br>受け取りました</span>'));
+    view.appendChild(card);
+
+    var list=el('div','card');
+    list.style.maxHeight='34vh';list.style.overflowY='auto';list.style.webkitOverflowScrolling='touch';
+    dates.forEach(function(d){
+      var item=el('div','box-item');
+      item.appendChild(el('div','box-date',fmtDate(d)));
+      item.appendChild(el('div','box-word',esc(WORDS[state.received[d]]||'')));
+      if(state.journal[d]) item.appendChild(el('div','box-journal',esc(state.journal[d])));
+      list.appendChild(item);
+    });
+    view.appendChild(list);
+    appendShare();
+    appendReplay();
+    appendBackup();
+  }
+
+  function renderBreath(){
+    if(breathTimer){clearInterval(breathTimer);breathTimer=null;}
+    var card=el('div','card');
+    card.appendChild(el('div','eyebrow','ひと呼吸'));
+    card.appendChild(el('div','prompt','1分で、心がやさしく満ちていく呼吸。<br>おだやかさと、心地よい軽やかさが戻る時間 🤍'));
+    var bn=el('div');bn.style.cssText='text-align:center;font-size:12px;color:var(--muted);margin-bottom:4px';
+    bn.textContent='吸う4秒 ・ 止める2秒 ・ 吐く6秒 を 3回';
+    card.appendChild(bn);
+    var stage=el('div','breath-stage');
+    var circle=el('div','breath-circle');
+    var txt=el('div','breath-text','準備ができたら');
+    stage.appendChild(circle);stage.appendChild(txt);
+    card.appendChild(stage);
+    var btn=el('button','btn soft','3回、呼吸する');
+    btn.style.marginTop='10px';
+    card.appendChild(btn);
+    view.appendChild(card);
+
+    var phases=[{label:'吸って',sec:4,cls:'in'},{label:'とめて',sec:2,cls:'hold'},{label:'吐いて',sec:6,cls:''}];
+    var cycles=3, running=false;
+    btn.onclick=function(){
+      if(running)return;running=true;btn.style.display='none';
+      var pi=0, ci=0, remain=0;
+      function startPhase(){
+        var p=phases[pi];
+        txt.textContent=p.label;
+        circle.style.transitionDuration=p.sec+'s';
+        circle.className='breath-circle'+(p.cls?(' '+p.cls):'');
+        remain=p.sec;
+        breathTimer=setInterval(function(){
+          remain--;
+          if(remain>0){return;}
+          clearInterval(breathTimer);breathTimer=null;
+          pi++; if(pi>=phases.length){pi=0;ci++;}
+          if(ci>=cycles){finish();return;}
+          startPhase();
+        },1000);
+      }
+      function finish(){
+        circle.className='breath-circle';circle.style.transitionDuration='';
+        txt.textContent='ととのいました 🤍';
+        setTimeout(function(){running=false;btn.style.display='';btn.textContent='もう一度';},1800);
+      }
+      startPhase();
+    };
+  }
+
+  render();
 })();
 </script>
+<div class="bg-copyright" style="text-align:center;font-size:11px;color:#9a9a9a;opacity:.85;padding:20px 12px 24px;line-height:1.7;font-family:-apple-system,sans-serif;">シェア・ご紹介は大歓迎です ／ 内容の無断複製・転売はご遠慮ください<br>© Be Grace</div>
 </body>
 </html>
