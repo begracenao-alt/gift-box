@@ -410,7 +410,7 @@ textarea:focus{outline:none;border-color:var(--gold);background:#fff}
     var dates=Object.keys(state.received).sort(function(a,b){return b.localeCompare(a);});
     if(!dates.length){
       card.appendChild(el('div','empty','まだ空っぽです。<br>「今日」で最初のことばを受け取ってください 🤍'));
-      view.appendChild(card);appendShare();appendReplay();appendBackup();return;
+      view.appendChild(card);appendReplay();appendBackup();return;
     }
     card.appendChild(el('div','streak','<span class="num">'+dates.length+'</span><span class="lbl">個のことばを<br>受け取りました</span>'));
     view.appendChild(card);
@@ -425,7 +425,7 @@ textarea:focus{outline:none;border-color:var(--gold);background:#fff}
       list.appendChild(item);
     });
     view.appendChild(list);
-    appendShare();
+    
     appendReplay();
     appendBackup();
   }
